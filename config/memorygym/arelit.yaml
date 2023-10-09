@@ -1,0 +1,57 @@
+# @package _global_
+defaults:
+  - override /trainer: ppo
+  - _self_
+
+tags: gtrxl
+project_name: "Memory Gym"
+seed: 1
+steps: 150000000
+log_interval: 10000
+record_fps: 5
+eval_episodes: 2
+eval_interval: null
+save_dir: './'
+save_interval: 5000000
+task: 
+  task: memory_gym
+  env_name: MysteryPath-Easy-v0
+trainer:
+  seq_model:
+    name: relit
+    n_layers: 4
+    d_model: 128
+    d_head: 64
+    d_ffc: 128
+    n_heads: 4
+    eta: 8
+    r: 2
+    reset_hidden_on_terminate: true
+  env_pool: async #Use synchronous vector env because memory gym doesn't play well with Gymnasium Vec Env
+  d_actor: 256
+  d_critic: 256
+  num_envs: 128
+  rollout_len: 128
+  sequence_length: null
+  anneal_lr: false
+  gamma: 0.99
+  gae_lambda: 0.95
+  num_minibatches: 8
+  update_epochs: 3
+  norm_adv: true
+  clip_coef: 0.2
+  ent_coef: 
+    initial:  0.0003
+    final:  null
+    max_decay_steps: 10000
+    power: 1
+  vf_coef: 0.5
+  max_grad_norm: 5.0
+  optimizer: 
+    learning_rate: 
+      initial: 0.00025
+      final: null
+      max_decay_steps: 10000
+      power: 1.0
+
+use_wandb: False
