@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ## Implementations
 1. AReLiT implementation in Jax+Flax: `./src/models/relit/arelit.py`
 2. ReLiT implementation in Jax+Flax: `./src/models/relit/relit.py`
-3. GTrXL implementation in Jax+Flax: `./src/models/gtrxl/gtrxl.py`
+3. GTrXL implementation in Jax+Flax: `./src/models/gtrxl.py`
 
 ## Authors: 
 1. Subhojeet Pramanik
