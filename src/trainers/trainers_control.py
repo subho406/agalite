@@ -97,7 +97,7 @@ class ControlTrainer(BaseTrainer):
         
         if self.trainer_config['agent']=='a2c':
             self.optimizer=optax.chain(optax.clip_by_global_norm(self.trainer_config['max_grad_norm']),  # Clip by the gradient by the global norm.
-                                    optax.adamw(**self.trainer_config.optimizer))  # Use Adam optimizer with learning rate.
+                                    optax.adam(**self.trainer_config.optimizer))  # Use Adam optimizer with learning rate.
             self.agent=A2CAgent(train_envs=train_envs,eval_env=eval_env,optimizer=self.optimizer, repr_model_fn=repr_fn,
                                 seq_model_fn=model_fn,actor_fn=actor_fn,critic_fn=critic_fn,
                                 rollout_len=self.rollout_len,
@@ -184,11 +184,11 @@ class ControlTrainer(BaseTrainer):
         #Checkpointing code
         self.checkpoint_dir=os.path.abspath(os.path.join(self.global_config.get('save_dir','./'),self.save_tag))
         ckpt_exists=os.path.exists(self.checkpoint_dir)
-        if not os.path.exists(self.checkpoint_dir):
+        if (self.save_interval is not None) and (not os.path.exists(self.checkpoint_dir)):
             os.makedirs(self.checkpoint_dir)
-        orbax_checkpointer = orbax.checkpoint.PyTreeCheckpointer()
-        options = orbax.checkpoint.CheckpointManagerOptions(max_to_keep=2, create=True)
-        self.manager = orbax.checkpoint.CheckpointManager(self.checkpoint_dir, orbax_checkpointer,options)
+            orbax_checkpointer = orbax.checkpoint.PyTreeCheckpointer()
+            options = orbax.checkpoint.CheckpointManagerOptions(max_to_keep=2, create=True)
+            self.manager = orbax.checkpoint.CheckpointManager(self.checkpoint_dir, orbax_checkpointer,options)
         #Restore from checkpoint if true)
         if ckpt_exists and self.global_config.get('restore',False):
             self.restore_checkpoint()

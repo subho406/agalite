@@ -141,7 +141,7 @@ class AttentionORLiTLayer(nn.Module):
         kv=(final_values*keys_dot_queries.reshape(cur_seq,self.r,self.head_num,1)).sum(1) # (cur_seq,  head_num, head_dim)
 
         norm=jnp.einsum('chd,chd->ch',final_s,queries) # (cur_seq, head_num)
-        attn_out=(kv+self.eps)/(2*self.r*norm.reshape(cur_seq,self.head_num,1)+self.eps) # (cur_seq, head_num, head_dim)
+        attn_out=(kv)/(2*self.r*norm.reshape(cur_seq,self.head_num,1)+self.eps) # (cur_seq, head_num, head_dim)
         attn_out=attn_out.reshape(cur_seq,self.head_num*self.head_dim) # (cur_seq, head_num * head_dim)
         #Project attn_out to input_dim
         attn_out=self.project(attn_out) # (cur_seq,  input_dim)
@@ -163,6 +163,7 @@ class RecurrentLinearTransformerEncoder(nn.Module):
     use_dense:bool=False #Use dense layer for input embedding
     gru_bias: float = 2.
     reset_hidden_on_terminate:bool=True
+    embedding_act:bool= True
     @nn.compact
     def __call__(self,inputs,terminations,last_memory):
         # inputs u_t^{i-1} shape T X d_model, c_tminus1: n_heads,d_model, kernel_dim
@@ -175,7 +176,8 @@ class RecurrentLinearTransformerEncoder(nn.Module):
         if self.use_dense:
             inputs_enc=nn.Dense(self.d_model,name='emb_layer',kernel_init=orthogonal(jnp.sqrt(2)),
                                     bias_init=constant(0.0))(inputs)
-            inputs_enc=nn.relu(inputs_enc)
+            if self.embedding_act:
+                inputs_enc=nn.relu(inputs_enc)
         else:
             inputs_enc=inputs
 

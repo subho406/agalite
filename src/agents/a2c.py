@@ -57,7 +57,7 @@ class A2CAgent(BaseAgent):
                 grad_fn=jax.value_and_grad(loss_fn,has_aux=True)
                 (loss,(value_loss,entropy_loss,actor_loss)),grads=grad_fn(params,random_key,observations,actions,rewards,
                                                          terminations,h_tickminus1)
-                updates,optimizer_state=self.optimizer.update(grads,optimizer_state)
+                updates,optimizer_state=self.optimizer.update(grads,optimizer_state,params)
                 params=optax.apply_updates(params,updates)
                 return (loss,(value_loss,entropy_loss,actor_loss)),params,optimizer_state 
         self.step_fn=step_fn

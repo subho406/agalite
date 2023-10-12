@@ -1,30 +1,27 @@
 # @package _global_
-defaults:
-  - override /trainer: ppo
-  - _self_
-
-tags: gtrxl
-project_name: "Memory Gym"
+tags: null
+project_name: "MPGrid"
 seed: 1
 steps: 150000000
 log_interval: 10000
 record_fps: 5
 eval_episodes: 2
 eval_interval: null
-save_dir: './'
-save_interval: 5000000
+save_dir: './checkpoints'
+save_interval: null
 task: 
   task: memory_gym
-  env_name: MysteryPath-Easy-v0
+  env_name: MysteryPath-Grid-Easy-v0
 trainer:
+  agent: ppo
   seq_model:
-    name: relit
+    name: arelit
     n_layers: 4
     d_model: 128
     d_head: 64
     d_ffc: 128
     n_heads: 4
-    eta: 8
+    eta: 4
     r: 2
     reset_hidden_on_terminate: true
   env_pool: async #Use synchronous vector env because memory gym doesn't play well with Gymnasium Vec Env
@@ -54,4 +51,4 @@ trainer:
       max_decay_steps: 10000
       power: 1.0
 
-use_wandb: False
+use_wandb: true

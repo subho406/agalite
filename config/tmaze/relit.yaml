@@ -8,7 +8,7 @@ eval_interval: null
 save_interval: null
 task: 
   task: tmazev2
-  corridor_len: 180
+  corridor_len: 120
   num_distractors: 6
   max_steps: null
   max_episode_steps: 1000
@@ -18,14 +18,17 @@ trainer:
   rollout_len: 256
   num_envs: 8
   seq_model:
-    name: arelit
+    name: relit
     n_layers: 4
     d_model: 128
     d_head: 64
     d_ffc: 128
     n_heads: 4
-    eta: 4
-    r: 2
+    update_rule: projected_sigmoid
+    flow: gtrxl
+    kernel:
+      name: pp_relu
+      nu: 2
     reset_hidden_on_terminate: true
   d_actor: 128
   d_critic: 128

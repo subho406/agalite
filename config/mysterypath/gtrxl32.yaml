@@ -1,0 +1,55 @@
+# @package _global_
+tags: null
+project_name: "MPGrid"
+seed: 1
+steps: 150000000
+log_interval: 10000
+record_fps: 5
+eval_episodes: 2
+eval_interval: null
+save_dir: './checkpoints'
+save_interval: null
+task: 
+  task: memory_gym
+  env_name: MysteryPath-Grid-Easy-v0
+trainer:
+  agent: ppo
+  seq_model:
+    name: gtrxl
+    head_dim: 64
+    embedding_dim: 128
+    head_num: 4
+    mlp_num: 2
+    layer_num: 4
+    dropout_ratio: 0.0
+    gru_bias: 2.
+    memory_len: 32
+    reset_hidden_on_terminate: true
+  env_pool: async #Use synchronous vector env because memory gym doesn't play well with Gymnasium Vec Env
+  d_actor: 256
+  d_critic: 256
+  num_envs: 128
+  rollout_len: 128
+  sequence_length: null
+  anneal_lr: false
+  gamma: 0.99
+  gae_lambda: 0.95
+  num_minibatches: 8
+  update_epochs: 3
+  norm_adv: true
+  clip_coef: 0.2
+  ent_coef: 
+    initial:  0.0003
+    final:  null
+    max_decay_steps: 10000
+    power: 1
+  vf_coef: 0.5
+  max_grad_norm: 5.0
+  optimizer: 
+    learning_rate: 
+      initial: 0.00025
+      final: null
+      max_decay_steps: 10000
+      power: 1.0
+
+use_wandb: true

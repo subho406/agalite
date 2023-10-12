@@ -8,7 +8,7 @@ eval_interval: null
 save_interval: null
 task: 
   task: tmazev2
-  corridor_len: 180
+  corridor_len: 120
   num_distractors: 6
   max_steps: null
   max_episode_steps: 1000
@@ -18,14 +18,15 @@ trainer:
   rollout_len: 256
   num_envs: 8
   seq_model:
-    name: arelit
-    n_layers: 4
-    d_model: 128
-    d_head: 64
-    d_ffc: 128
-    n_heads: 4
-    eta: 4
-    r: 2
+    name: gtrxl
+    memory_len: 256
+    head_num: 4
+    layer_num: 4
+    head_dim: 64
+    embedding_dim: 128
+    mlp_num: 2
+    dropout_ratio: 0.0
+    gru_bias: 2.
     reset_hidden_on_terminate: true
   d_actor: 128
   d_critic: 128
@@ -35,7 +36,7 @@ trainer:
   value_coef: 0.5
   max_grad_norm: 0.5
   optimizer:
-    learning_rate: 0.0001
+    learning_rate: 0.0005
   arg_max: false
 
 use_wandb: true

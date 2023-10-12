@@ -11,9 +11,54 @@ Follow https://jax.readthedocs.io/en/latest/installation.html for installing Jax
 # Python version 3 is required
 pip install -r requirements.txt
 ```
+Install Weights and Biases for logging from https://docs.wandb.ai/quickstart.
 
 ## Usage
+### T-Maze:
+```
+# AReLiT in T-Maze corridor length 160
+$ python trainer.py +tmaze=arelit task.corridor_len=160
 
+# ReLiT
+$ python trainer.py +tmaze=relit
+
+# GTrXL256
+$ python trainer.py +tmaze=gtrxl128
+
+# GTrXL128
+$ python trainer.py +tmaze=gtrxl256 
+
+# LSTM
+$ python trainer.py +tmaze=lstm
+
+# GRU
+$ python trainer.py +tmaze=gru
+```
+
+### Mystery Path:
+```
+# AReLiT (\eta=4) in MPGrid
+$ python trainer.py +mysterypath=arelit4 task.env_name=MysteryPath-Grid-Easy-v0
+
+# AReLiT (\eta=4) in MP
+$ python trainer.py +mysterypath=arelit4 task.env_name=MysteryPath-Easy-v0
+
+# GTrXL128 in MPGrid
+$ python trainer.py +mysterypath=gtrxl128 task.env_name=MysteryPath-Grid-Easy-v0
+
+# GTrXL64 in MP
+$ python trainer.py +mysterypath=gtrxl64 task.env_name=MysteryPath-Easy-v0
+
+# GTrXL32 in MP
+$ python trainer.py +mysterypath=gtrxl32 task.env_name=MysteryPath-Easy-v0
+```
+
+## Available configurations:
+The training script uses Hydra configuration management, the list of available configurations could be invoked using: 
+
+```
+$ python3 trainer.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
+```
 
 ## Implementations
 1. AReLiT implementation in Jax+Flax: `./src/models/relit/arelit.py`
