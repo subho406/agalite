@@ -18,7 +18,6 @@ def main(config: DictConfig):
     import jax.numpy as jnp
     import itertools
     from src.trainers.trainers_control import ControlTrainer
-    import pandas as pd
     from tqdm import tqdm
     import numpy as np
     

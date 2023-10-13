@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 outputs/  
+wandb/
 # C extensions
 *.so
 .DS_Store

@@ -1,23 +1,17 @@
 import json
 import numpy as np
 import optax
-import pandas as pd
-import rlax
 import orbax.checkpoint
 import wandb
 import os
 import hashlib
 import base64
-import cloudpickle
 
 import gymnasium as gym
 import time
 import logging
-from argparse import Namespace
 
-from etils import epath
 from src.trainers.base_trainer import BaseTrainer
-from collections import OrderedDict
 from src.tasks.tmaze import create_tmazev2
 from src.tasks.memory_gym_env import  create_memorygym_env
 from src.agents.a2c import A2CAgent
@@ -26,7 +20,7 @@ from src.model_fns import *
 from src.tasks.wrappers import *
 from src.trainers.utils import *
 from gymnasium.wrappers import AutoResetWrapper
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import  OmegaConf
 
 
 logger = logging.getLogger(__name__)
@@ -281,10 +275,6 @@ class ControlTrainer(BaseTrainer):
             self.save_checkpoint()
         return loss,metrics,self.step_count
     
-
-    def get_summary_table(self,ckpt_path, ckpt_name):
-        return pd.DataFrame(self.result_data).to_json(default_handler=str)
-
     def save_checkpoint(self):
         ckpt={'step':self.step_count,'agent':self.agent.params,'optimizer':self.agent.optimizer_state}
         self.manager.save(self.step_count,ckpt)
