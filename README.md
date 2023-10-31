@@ -11,7 +11,7 @@
 Follow https://jax.readthedocs.io/en/latest/installation.html for installing Jax and Jaxlib. Then run the following command to install the dependencies:
 ```
 # Python version 3 is required
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 Install Weights and Biases for logging from https://docs.wandb.ai/quickstart.
 
