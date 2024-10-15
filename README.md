@@ -83,13 +83,13 @@ $ python trainer_pure.py +craftax=gtrxl128
 The training script uses Hydra configuration management, the list of available configurations could be invoked using: 
 
 ```
-$ python3 trainer.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
+$ python trainer.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
 ```
 
 Alternatively, for the purejaxrl implementation use: 
 
 ```
-$ python3 trainer_pure.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
+$ python trainer_pure.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
 ```
 
 ## Implementations
