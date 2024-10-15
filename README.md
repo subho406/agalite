@@ -93,9 +93,9 @@ $ python3 trainer_pure.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
 ```
 
 ## Implementations
-1. AGaLiTe implementation in Jax+Flax: `./src_pure/models/galite/agalite.py`
-2. GaLiTe implementation in Jax+Flax: `./src_pure/models/galite/galite.py`
-3. GTrXL implementation in Jax+Flax: `./src_pure/models/gtrxl.py`
+1. AGaLiTe implementation in Jax+Flax: `./src/models/agalite/agalite.py` or `./src_pure/models/agalite.py`
+2. GaLiTe implementation in Jax+Flax: `./src/models/agalite/galite.py`
+3. GTrXL implementation in Jax+Flax: `./src/models/gtrxl.py` or `./src_pure/models/gtrxl.py`
 4. purejaxrl implementation: `./src_pure/purejaxrl/ppo_rnn.py`
 
 ## Authors: 
