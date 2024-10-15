@@ -5,8 +5,8 @@ from typing import Callable
 from src.utils import tree_index
 from src.models.rnn import LSTMMultiLayer,GRUMultiLayer
 from src.models.gtrxl import GTrXL
-from src.models.relit.relit import ReLiT
-from src.models.relit.arelit import AReLiT
+from src.models.agalite.galite import GaLiTe
+from src.models.agalite.agalite import AGaLiTe
 from flax.linen.initializers import constant, orthogonal
 
 def seq_model_lstm(**kwargs):
@@ -61,24 +61,24 @@ def seq_model_feedforward(**kwargs):
     return thurn,initialize
 
 
-def seq_model_relit(**kwargs):
+def seq_model_galite(**kwargs):
     def thurn():
-        return ReLiT(n_layers=kwargs['n_layers'],d_model=kwargs['d_model'],d_head=kwargs['d_head'],d_ffc=kwargs['d_ffc'],
+        return GaLiTe(n_layers=kwargs['n_layers'],d_model=kwargs['d_model'],d_head=kwargs['d_head'],d_ffc=kwargs['d_ffc'],
                                             n_heads=kwargs['n_heads'],kernel_config=kwargs['kernel'],update_rule=kwargs['update_rule'],
                                             reset_on_terminate=kwargs['reset_hidden_on_terminate'],ret_mem_ax_grad=-1,flow=kwargs['flow'])
     def initialize():
-        return ReLiT.initialize_memory(n_layers=kwargs['n_layers'],n_heads=kwargs['n_heads'],
+        return GaLiTe.initialize_memory(n_layers=kwargs['n_layers'],n_heads=kwargs['n_heads'],
                                                             d_head=kwargs['d_head'],kernel_config=kwargs['kernel'])
     return thurn,initialize
 
 
-def seq_model_arelit(**kwargs):
+def seq_model_agalite(**kwargs):
     def thurn():
-        return AReLiT(n_layers=kwargs['n_layers'],d_model=kwargs['d_model'],d_head=kwargs['d_head'],d_ffc=kwargs['d_ffc'],
+        return AGaLiTe(n_layers=kwargs['n_layers'],d_model=kwargs['d_model'],d_head=kwargs['d_head'],d_ffc=kwargs['d_ffc'],
                                             n_heads=kwargs['n_heads'],eta=kwargs['eta'],r=kwargs['r'],
                                             reset_on_terminate=kwargs['reset_hidden_on_terminate'])
     def initialize():
-        return AReLiT.initialize_memory(n_layers=kwargs['n_layers'],n_heads=kwargs['n_heads'],
+        return AGaLiTe.initialize_memory(n_layers=kwargs['n_layers'],n_heads=kwargs['n_heads'],
                                                             d_head=kwargs['d_head'],eta=kwargs['eta'],r=kwargs['r'])                                              
     return thurn,initialize
 

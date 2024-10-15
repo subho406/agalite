@@ -7,3 +7,4 @@ gymnasium
 memory_gym
 tqdm
 flax
+pytz

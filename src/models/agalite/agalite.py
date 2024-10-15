@@ -8,8 +8,8 @@ import jax.numpy as jnp
 from typing import NamedTuple, Optional,Any,Sequence
 
 from src.utils import *
-from src.models.relit.layers import *
-from src.models.relit.kernels import *
+from src.models.agalite.layers import *
+from src.models.agalite.kernels import *
 import numpy as np
 
 
@@ -211,7 +211,7 @@ class RecurrentLinearTransformerEncoder(nn.Module):
         tick=jnp.array([1.0])
         return (tilde_k_prev,tilde_v_prev, s_prev,tick)
 
-class AReLiT(nn.Module):
+class AGaLiTe(nn.Module):
     n_layers:int
     d_model:int
     d_head:int

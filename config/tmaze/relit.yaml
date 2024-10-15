@@ -18,7 +18,7 @@ trainer:
   rollout_len: 256
   num_envs: 8
   seq_model:
-    name: relit
+    name: galite
     n_layers: 4
     d_model: 128
     d_head: 64

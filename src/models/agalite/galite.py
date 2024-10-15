@@ -4,8 +4,8 @@ import jax.numpy as jnp
 from typing import NamedTuple, Optional,Any,Sequence
 
 from src.utils import *
-from src.models.relit.layers import *
-from src.models.relit.kernels import *
+from src.models.agalite.layers import *
+from src.models.agalite.kernels import *
 import numpy as np
 
 
@@ -308,7 +308,7 @@ class RecurrentLinearTransformerEncoder(nn.Module):
     def create_memory(c_tminus1,s_tminus1,tick):
         return {'memory':Memory(c=c_tminus1,s=s_tminus1),'tick':tick}
 
-class ReLiT(nn.Module):
+class GaLiTe(nn.Module):
     n_layers:int
     d_model:int
     d_head:int

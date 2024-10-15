@@ -15,7 +15,7 @@ task:
 trainer:
   agent: ppo
   seq_model:
-    name: arelit
+    name: agalite
     n_layers: 4
     d_model: 128
     d_head: 64

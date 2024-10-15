@@ -80,10 +80,10 @@ class ControlTrainer(BaseTrainer):
             model_fn=seq_model_gtrxl(**self.trainer_config['seq_model'])
         elif self.trainer_config.seq_model.name=='feedforward':
             model_fn=seq_model_feedforward(**self.trainer_config['seq_model'])
-        elif self.trainer_config.seq_model.name=='relit':
-            model_fn=seq_model_relit(**self.trainer_config['seq_model'])
-        elif self.trainer_config.seq_model.name=='arelit':
-            model_fn=seq_model_arelit(**self.trainer_config['seq_model'],seed=kwargs['seed'])
+        elif self.trainer_config.seq_model.name=='galite':
+            model_fn=seq_model_galite(**self.trainer_config['seq_model'])
+        elif self.trainer_config.seq_model.name=='agalite':
+            model_fn=seq_model_agalite(**self.trainer_config['seq_model'],seed=kwargs['seed'])
 
         actor_fn=actor_model_discete(self.trainer_config['d_actor'],eval_env.action_space.n)
         critic_fn=critic_model(self.trainer_config['d_critic'])

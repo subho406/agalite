@@ -1,4 +1,4 @@
-from src.models.relit.layers import *
+from src.models.agalite.layers import *
 
 
 def initialize_kernel(dim,kernel_config):
