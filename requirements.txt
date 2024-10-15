@@ -8,3 +8,7 @@ memory_gym
 tqdm
 flax
 pytz
+gymnax
+brax
+omegaconf
+craftax

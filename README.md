@@ -4,9 +4,22 @@
 
 ***(Published in Transactions on Machine Learning Research)***
 
+
+[![Watch the video](https://img.youtube.com/vi/-bTe48JIUds/maxresdefault.jpg)](https://www.youtube.com/watch?v=-bTe48JIUds)
+
 **Paper URL:** https://openreview.net/forum?id=lh6vOAHuvo
 
 **Abstract:** In this paper we investigate transformer architectures designed for partially observable online reinforcement learning. The self-attention mechanism in the transformer architecture is capable of capturing long-range dependencies and it is the main reason behind its effectiveness in processing sequential data. Nevertheless, despite their success, transformers have two significant drawbacks that still limit their applicability in online reinforcement learning: (1) in order to remember all past information, the self-attention mechanism requires access to the whole history to be provided as context. (2) The inference cost in transformers is expensive. In this paper, we introduce recurrent alternatives to the transformer self-attention mechanism that offer context-independent inference cost, leverage long-range dependencies effectively, and performs well in online reinforcement learning task. We quantify the impact of the different components of our architecture in a diagnostic environment and assess performance gains in 2D and 3D pixel-based partially-observable environments (e.g. T-Maze, Mystery Path, Craftax, and Memory Maze). Compared with a state-of-the-art architecture, GTrXL, inference in our approach is at least 40% cheaper while reducing memory use more than 50%. Our approach either performs similarly or better than GTrXL, improving more than 37% upon GTrXL performance in harder tasks.
+
+
+## Overview
+
+This repository contains the code for reproducing the results from the **AGaLiTe: Approximate Gated Linear Transformers for Online Reinforcement Learning** paper, published in *Transactions on Machine Learning Research (TMLR)*. The experiments cover several challenging environments, and the repository is organized based on the specific implementations used for each.
+
+- **T-Maze and Mystery Path experiments** were conducted using the CleanRL implementation of PPO. The relevant code for these experiments can be found in the `src/` directory.
+  
+- **Craftax experiments** utilized the purejaxrl implementation of PPO, optimized for JAX-based environments. This implementation leverages `jax.lax.scan` for efficient environment stepping, and the code for these experiments is located in the `src_pure/` directory.
+
 
 ## Installation
 Follow pip install -U "jax[cuda12]" for installing Jax and Jaxlib. Then run the following command to install the dependencies:
@@ -56,6 +69,16 @@ $ python trainer.py +mysterypath=gtrxl64 task.env_name=MysteryPath-Easy-v0
 $ python trainer.py +mysterypath=gtrxl32 task.env_name=MysteryPath-Easy-v0
 ```
 
+### Craftax
+```
+# AGaLiTe in Craftax Symbolic
+$ python trainer_pure.py +craftax=arelit
+
+# GTrXL128 in Craftax Symbolic
+$ python trainer_pure.py +craftax=gtrxl128
+
+```
+
 ## Available configurations:
 The training script uses Hydra configuration management, the list of available configurations could be invoked using: 
 
@@ -63,10 +86,17 @@ The training script uses Hydra configuration management, the list of available c
 $ python3 trainer.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
 ```
 
+Alternatively, for the purejaxrl implementation use: 
+
+```
+$ python3 trainer_pure.py +<TASK_NAME>=<BASE_CONFIG_NAME> --help
+```
+
 ## Implementations
-1. AGaLiTe implementation in Jax+Flax: `./src/models/galite/agalite.py`
-2. GaLiTe implementation in Jax+Flax: `./src/models/galite/galite.py`
-3. GTrXL implementation in Jax+Flax: `./src/models/gtrxl.py`
+1. AGaLiTe implementation in Jax+Flax: `./src_pure/models/galite/agalite.py`
+2. GaLiTe implementation in Jax+Flax: `./src_pure/models/galite/galite.py`
+3. GTrXL implementation in Jax+Flax: `./src_pure/models/gtrxl.py`
+4. purejaxrl implementation: `./src_pure/purejaxrl/ppo_rnn.py`
 
 ## Authors: 
 1. Subhojeet Pramanik

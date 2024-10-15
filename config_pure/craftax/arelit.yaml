@@ -1,0 +1,35 @@
+# @package _global_
+defaults:
+  - _self_
+  
+RNN:
+  RNN_TYPE: agalite
+  N_LAYERS: 4
+  D_MODEL: 128
+  D_HEAD: 64
+  D_FFC: 128
+  N_HEADS: 4
+  ETA: 8
+  R: 2
+LR: 0.0004
+NUM_ENVS: 1024
+NUM_STEPS: 128
+TOTAL_TIMESTEPS: 1e9
+UPDATE_EPOCHS: 4
+LOG_INTERVAL: 10  # Log every 10 updates
+NUM_MINIBATCHES: 8
+GAMMA: 0.99
+GAE_LAMBDA: 0.8
+CLIP_EPS: 0.2
+ENT_COEF: 0.01
+VF_COEF: 0.5
+MAX_GRAD_NORM: 1.0
+ENV_NAME: craftax
+ANNEAL_LR: true
+DEBUG: true
+OPTIMISTIC_RESETS: true
+HIDDEN: 128
+USE_WANDB: true
+WANDB_PROJECT: craftax_finals
+WANDB_TAGS: null
+SEED: 0
