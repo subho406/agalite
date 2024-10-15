@@ -39,10 +39,10 @@ $ python trainer.py +tmaze=agalite task.corridor_len=160
 $ python trainer.py +tmaze=galite
 
 # GTrXL256
-$ python trainer.py +tmaze=gtrxl128
+$ python trainer.py +tmaze=gtrxl256
 
 # GTrXL128
-$ python trainer.py +tmaze=gtrxl256 
+$ python trainer.py +tmaze=gtrxl128
 
 # LSTM
 $ python trainer.py +tmaze=lstm
